@@ -24,3 +24,11 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     role VARCHAR(20) NOT NULL
 );
+
+CREATE TABLE activities (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    description TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
