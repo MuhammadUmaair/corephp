@@ -1,14 +1,9 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRM Dashboard</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <?php include('templates/header.php'); ?>
 <body>
+    <?php include('includes/navbar.php'); ?>
     <div class="container">
         <h2>CRM Dashboard</h2>
         <div class="row">
@@ -16,7 +11,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Total Customers</h5>
-                        <p class="card-text" id="totalCustomers"></p>
+                        <p class="card-text" id="totalCustomers">0</p>
                     </div>
                 </div>
             </div>
@@ -24,7 +19,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Recent Activities</h5>
-                        <p class="card-text" id="recentActivities"></p>
+                        <p class="card-text" id="recentActivities">0</p>
                     </div>
                 </div>
             </div>
@@ -34,5 +29,17 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Simulate fetching data from the server
+            setInterval(function() {
+                $.get("path/to/server/script", function(data) {
+                    $("#totalCustomers").text(data.totalCustomers);
+                });
+            }, 60000); // Every 60 seconds
+        });
+    </script>
 </body>
+
 </html>
