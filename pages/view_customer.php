@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include('../templates/header.php'); ?>
+<?php
+session_start();
+include('../pages/auth/auth.php');
+checkAuth();
+checkRole('admin');
+include('../templates/header.php');
+?>
+
 <body>
-   
-<?php include('../includes/navbar.php'); ?>
+
+    <?php include('../includes/navbar.php'); ?>
     <div class="container mt-5">
         <h2 class="text-center">View Customers</h2>
         <table class="table table-bordered">
