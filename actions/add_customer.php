@@ -1,23 +1,39 @@
-<?php
-require_once '../includes/db_connect.php';
+<!DOCTYPE html>
+<html lang="en">
 
-$database = new Database();
-$db = $database->getConnection();
+<?php include('../templates/header.php'); ?>
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = htmlspecialchars($_POST['name']);
-    $email = htmlspecialchars($_POST['email']);
-    $phone_number = htmlspecialchars($_POST['phone_number']);
+<body>
 
-    $query = "INSERT INTO customers (name, email, phone_number) VALUES (?, ?, ?)";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(1, $name);
-    $stmt->bindParam(2, $email);
-    $stmt->bindParam(3, $phone_number);
+    <?php include('../includes/navbar.php'); ?>
+    <div class="container mt-5">
+        <h2 class="text-center">Add Customer</h2>
+        <?php
+        require_once '../includes/db_connect.php';
 
-    if ($stmt->execute()) {
-        echo json_encode(array("message" => "Customer added."));
-    } else {
-        echo json_encode(array("message" => "Unable to add customer."));
-    }
-}
+        $database = new Database();
+        $db = $database->getConnection();
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $name = htmlspecialchars($_POST['name']);
+            $email = htmlspecialchars($_POST['email']);
+            $address = htmlspecialchars($_POST['address']);
+            $phone_number = htmlspecialchars($_POST['phone_number']);
+
+            $query = "INSERT INTO customers (name, email,address, phone_number) VALUES (?, ?, ?, ?)";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(1, $name);
+            $stmt->bindParam(2, $email);
+            $stmt->bindParam(3, $address);
+            $stmt->bindParam(4, $phone_number);
+
+            if ($stmt->execute()) {
+                echo "<p class='text-center'>Customer added successfully</p>";
+            } else {
+                echo "<p class='text-center'>Error: " . $stmt->error . "</p>";
+            }
+        }
+        ?>
+    </div>
+</body>
+
+</html>
