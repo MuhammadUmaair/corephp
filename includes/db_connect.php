@@ -1,19 +1,23 @@
 <?php
-// Database credentials
-$servername = "localhost";   // Replace with your database server name
-$username = "username";      // Replace with your database username
-$password = "password";      // Replace with your database password
-$dbname = "test";    // Replace with your database name
+class Database
+{
+    private $host = 'localhost';
+    private $db_name = 'crm_db';
+    private $username = 'root';
+    private $password = '';
+    public $conn;
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+    public function getConnection()
+    {
+        $this->conn = null;
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+        try {
+            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $exception) {
+            echo "Connection error: " . $exception->getMessage();
+        }
+
+        return $this->conn;
+    }
 }
-
-// Set UTF-8 encoding
-mysqli_set_charset($conn, "utf8");
-
-?>
