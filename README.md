@@ -139,6 +139,8 @@ crm-dashboard/
 ├── index.php
 └── README.md
 
+```
+
 
 ## Endpoints
 - index.php: Main dashboard page
