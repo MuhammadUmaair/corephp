@@ -150,37 +150,12 @@ crm-dashboard/
 ## Database Schema
 ### Users Table
 
-<table>
-<thead>
-<tr>
-<th>Column</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id</td>
-<td>INT</td>
-<td>Primary key</td>
-</tr>
-<tr>
-<td>username</td>
-<td>VARCHAR</td>
-<td>User's username</td>
-</tr>
-<tr>
-<td>password</td>
-<td>VARCHAR</td>
-<td>User's hashed password</td>
-</tr>
-<tr>
-<td>role</td>
-<td>VARCHAR</td>
-<td>User's role (admin/user)</td>
-</tr>
-</tbody>
-</table>
+| Column | Type | Description |
+| --- | --- | --- |
+| id | INT | Primary key |
+| username | VARCHAR | User's username |
+| password | VARCHAR | User's hashed password |
+| role | VARCHAR | User's role (admin/user) |
 
 ### Customers Table
 
