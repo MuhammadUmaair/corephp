@@ -41,7 +41,7 @@
                         echo "<td>" . htmlspecialchars($row['address']) . "</td>";
                         echo "<td>
                                 <a href='edit_customer.php?id=" . htmlspecialchars($row['id']) . "' class='btn btn-warning btn-sm'>Edit</a>
-                                <a href='delete_customer.php?id=" . htmlspecialchars($row['id']) . "' class='btn btn-danger btn-sm'>Delete</a>
+                                <a href='../actions/delete_customer.php?id=" . htmlspecialchars($row['id']) . "' class='btn btn-danger btn-sm'>Delete</a>
                               </td>";
                         echo "</tr>";
                     }
