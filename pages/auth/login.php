@@ -1,5 +1,7 @@
 <?php
 session_start();
+include('auth.php');
+checkLogin();
 
 $servername = "localhost";
 $username = "root";
