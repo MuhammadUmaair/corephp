@@ -44,7 +44,7 @@ include('../templates/header.php');
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone:</label>
-                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="<?php echo htmlspecialchars($row['phone_number']); ?>" required>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="<?php echo htmlspecialchars($row['phone']); ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="address">Address:</label>
