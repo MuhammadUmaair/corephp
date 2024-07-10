@@ -18,24 +18,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = filter_var($_POST['phone_number'], FILTER_SANITIZE_STRING);
     $address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
     
-    $stmt = $conn->prepare("INSERT INTO customers (name, email, phone_number, address) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $name, $email, $phone_number, $address);
     
-    if ($stmt->execute()) {
-        // Record the activity
-        $userId = $_SESSION['user_id'];
-        $activityDescription = "Added a new customer: $name";
+    if($stmt = $conn->prepare("INSERT INTO customers (name, email, phone, address) VALUES (?, ?, ?, ?)")){
+        $stmt->bind_param("ssss", $name, $email, $phone, $address);
         
-        $activityStmt = $conn->prepare("INSERT INTO activities (user_id, description) VALUES (?, ?)");
-        $activityStmt->bind_param("is", $userId, $activityDescription);
-        $activityStmt->execute();
-        $activityStmt->close();
-        
-        echo "<p class='text-center'>Customer added successfully</p>";
+        if ($stmt->execute()) {
+            // Record the activity
+            $userId = $_SESSION['user_id'];
+            $activityDescription = "Added a new customer: $name";
+            
+            $activityStmt = $conn->prepare("INSERT INTO activities (user_id, description) VALUES (?, ?)");
+            $activityStmt->bind_param("is", $userId, $activityDescription);
+            $activityStmt->execute();
+            $activityStmt->close();
+            
+            echo "<p class='text-center'>Customer added successfully</p>";
+        } else {
+            echo "<p class='text-center'>Error: " . $stmt->error . "</p>";
+        }
+        $stmt->close();
     } else {
-        echo "<p class='text-center'>Error: " . $stmt->error . "</p>";
+        echo "Error: " . $conn->error;
     }
-    $stmt->close();
 }
 $conn->close();
 ?>
